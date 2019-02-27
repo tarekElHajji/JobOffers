@@ -10,19 +10,38 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+                <a href="#" class="navbar-brand">
+                    <img src="~/Images/logo.png" class="logo" />
+                </a>
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li> 
+                        <a href="#"> <i class="glyphicon glyphicon-home"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="glyphicon glyphicon-briefcase"></i> Category</a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="glyphicon glyphicon-envelope"></i> About</a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="glyphicon glyphicon-envelope"></i> Contact us</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#"> <i class="glyphicon glyphicon-user"></i> Sig in</a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="glyphicon glyphicon-lock"></i> Sign up</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -22,3 +22,21 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.logo{
+    width:50px;
+    height:50px;
+}
+.navbar-brand {
+    padding:2px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #D0D0D0;
+    font-size:15px;
+}
+
