@@ -5,30 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/fontAwesome")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#" class="navbar-brand">
-                    <img src="~/Images/logo.png" class="logo" />
-                </a>
-                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">
+                <img src="~/Images/logo.png" class="logo" />
+            </a>
+            @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li> 
+                    <li>
                         <a href="#"> <i class="glyphicon glyphicon-home"></i> Home</a>
                     </li>
                     <li>
                         <a href="#"> <i class="glyphicon glyphicon-briefcase"></i> Category</a>
                     </li>
                     <li>
-                        <a href="#"> <i class="glyphicon glyphicon-envelope"></i> About</a>
+                        <a href="#"> <i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
                     <li>
                         <a href="#"> <i class="glyphicon glyphicon-envelope"></i> Contact us</a>
@@ -49,10 +50,49 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+
+    @*<footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+
+    <footer id="myFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>
+                        About us
+                    </h3>
+                    <p>
+                        we are a website that offers jobs
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <h3>
+                        Other links
+                    </h3>
+                    <ul>
+                        <li><a href="">Private Sector Employment</a></li>
+                        <li><a href="">Public Sector Employment</a></li>
+                        <li><a href="">Abroad Jobs</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Follow us on</h3>
+                    <div class="social-networks">
+                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" class="email"><i class="fa fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>           
+        </div>
+        <div class="footer-copyright">
+            <p>© 2018 Copyright: Job Offers</p>
+        </div>
+
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
