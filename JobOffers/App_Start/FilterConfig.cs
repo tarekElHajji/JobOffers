@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace JobOffers
+namespace identity
 {
     public class FilterConfig
     {

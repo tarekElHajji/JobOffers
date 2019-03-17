@@ -19,7 +19,6 @@
             <a href="#" class="navbar-brand">
                 <img src="~/Images/logo.png" class="logo" />
             </a>
-            @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
@@ -48,13 +47,11 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
+        <div class="row">
+            @RenderBody()
+            <hr />
+        </div>
     </div>
-
-    @*<footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
 
     <footer id="myFooter">
         <div class="container">
