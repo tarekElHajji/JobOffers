@@ -34,22 +34,17 @@
                         <a href="#"> <i class="glyphicon glyphicon-envelope"></i> Contact us</a>
                     </li>
                 </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#"> <i class="glyphicon glyphicon-user"></i> Sig in</a>
-                    </li>
-                    <li>
-                        <a href="#"> <i class="glyphicon glyphicon-lock"></i> Sign up</a>
-                    </li>
-                </ul>
+                @*login partial navbar*@
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
         <div class="row">
-            @RenderBody()
-            <hr />
+            <div class="col-md-12">
+                @RenderBody()
+                <hr />
+            </div>
         </div>
     </div>
 
