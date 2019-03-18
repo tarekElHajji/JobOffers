@@ -130,7 +130,11 @@ textarea {
         line-height: 25px;
     }
 
-@media (min-width: 768px) and (max-width: 991px) {
+h3 {
+    color: #3276b1;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
     /*.navbar-nav > li > a {
         font-size: 12px;
     }
@@ -141,5 +145,10 @@ textarea {
 
     .navbar-nav > li > a {
         padding-right : 0px;
+    }
+}
+@media (min-width: 992px) {
+    .form-horizontal .control-label {
+         text-align: left; 
     }
 }
