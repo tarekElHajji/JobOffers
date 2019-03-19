@@ -70,6 +70,10 @@ namespace identity.Models
         public string UserName { get; set; }
 
         [Required]
+        [Display(Name ="User Type")]
+        public string UserType { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
