@@ -30,5 +30,7 @@ namespace identity.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<JobOffers.Models.Category> Categories { get; set; }
     }
 }
