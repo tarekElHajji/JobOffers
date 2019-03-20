@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -199,10 +200,19 @@
     <Compile Include="Migrations\201903192212035_AddCategoryTable.Designer.cs">
       <DependentUpon>201903192212035_AddCategoryTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903201240263_AddJobTable.cs" />
+    <Compile Include="Migrations\201903201240263_AddJobTable.Designer.cs">
+      <DependentUpon>201903201240263_AddJobTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903202137425_UpdateJobTable.cs" />
+    <Compile Include="Migrations\201903202137425_UpdateJobTable.Designer.cs">
+      <DependentUpon>201903202137425_UpdateJobTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Jobs.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -279,6 +289,11 @@
     <Content Include="Views\Category\Details.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Job\Create.cshtml" />
+    <Content Include="Views\Job\Delete.cshtml" />
+    <Content Include="Views\Job\Details.cshtml" />
+    <Content Include="Views\Job\Edit.cshtml" />
+    <Content Include="Views\Job\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -309,6 +324,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903192212035_AddCategoryTable.resx">
       <DependentUpon>201903192212035_AddCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903201240263_AddJobTable.resx">
+      <DependentUpon>201903201240263_AddJobTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903202137425_UpdateJobTable.resx">
+      <DependentUpon>201903202137425_UpdateJobTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

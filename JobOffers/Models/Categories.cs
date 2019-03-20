@@ -6,7 +6,7 @@ using System.Web;
 
 namespace JobOffers.Models
 {
-    public class Category
+    public class Categories
     {
         [Required]
         public int Id { get; set; }
@@ -18,5 +18,7 @@ namespace JobOffers.Models
         [Required]
         [Display(Name ="Category Description")]
         public string CategoryDescription { get; set; }
+
+        public IEnumerable<Jobs> Jobs { get; set; }
     }
 }

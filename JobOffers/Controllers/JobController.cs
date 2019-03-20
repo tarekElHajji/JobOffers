@@ -11,107 +11,112 @@ using identity.Models;
 
 namespace JobOffers.Controllers
 {
-    public class CategoryController : Controller
+    public class JobController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Categorie
+        // GET: Job
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            var jobs = db.Jobs.Include(j => j.Categorie);
+            return View(jobs.ToList());
         }
 
-        // GET: Categorie/Details/5
+        // GET: Job/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories category = db.Categories.Find(id);
-            if (category == null)
+            Jobs jobs = db.Jobs.Find(id);
+            if (jobs == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(jobs);
         }
 
-        // GET: Categorie/Create
+        // GET: Job/Create
         public ActionResult Create()
         {
+            ViewBag.CategoriesId = new SelectList(db.Categories, "Id", "CategoryName");
             return View();
         }
 
-        // POST: Categorie/Create
+        // POST: Job/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CategoryName,CategoryDescription")] Categories category)
+        public ActionResult Create([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId")] Jobs jobs)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
+                db.Jobs.Add(jobs);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            ViewBag.CategoriesId = new SelectList(db.Categories, "Id", "CategoryName", jobs.CategoriesId);
+            return View(jobs);
         }
 
-        // GET: Categorie/Edit/5
+        // GET: Job/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories category = db.Categories.Find(id);
-            if (category == null)
+            Jobs jobs = db.Jobs.Find(id);
+            if (jobs == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            ViewBag.CategoriesId = new SelectList(db.Categories, "Id", "CategoryName", jobs.CategoriesId);
+            return View(jobs);
         }
 
-        // POST: Categorie/Edit/5
+        // POST: Job/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CategoryName,CategoryDescription")] Categories category)
+        public ActionResult Edit([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId")] Jobs jobs)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(jobs).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            ViewBag.CategoriesId = new SelectList(db.Categories, "Id", "CategoryName", jobs.CategoriesId);
+            return View(jobs);
         }
 
-        // GET: Categorie/Delete/5
+        // GET: Job/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories category = db.Categories.Find(id);
-            if (category == null)
+            Jobs jobs = db.Jobs.Find(id);
+            if (jobs == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(jobs);
         }
 
-        // POST: Categorie/Delete/5
+        // POST: Job/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Categories category = db.Categories.Find(id);
-            db.Categories.Remove(category);
+            Jobs jobs = db.Jobs.Find(id);
+            db.Jobs.Remove(jobs);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
