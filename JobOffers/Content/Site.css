@@ -149,6 +149,14 @@ h3 {
     color: #3276b1;
 }
 
+.jobImage{
+    height:70px;
+    width: 70px;
+}
+.table tbody > tr > td{
+    vertical-align: middle;
+}
+
 @media (min-width: 768px) and (max-width: 992px) {
     /*.navbar-nav > li > a {
         font-size: 12px;

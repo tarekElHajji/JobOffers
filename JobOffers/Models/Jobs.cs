@@ -27,6 +27,6 @@ namespace JobOffers.Models
         [Display(Name = "Job Category")]
         public int CategoriesId { get; set; }
 
-        public Categories Categorie { get; set; }
+        public virtual Categories Categorie { get; set; }
     }
 }

@@ -88,10 +88,15 @@ namespace JobOffers.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId")] Jobs jobs)
+        public ActionResult Edit([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId")] Jobs jobs, HttpPostedFileBase JobImage)
         {
             if (ModelState.IsValid)
             {
+                string path = Path.Combine(Server.MapPath("~/Uploads"), JobImage.FileName);
+                JobImage.SaveAs(path);
+
+                jobs.JobImage = JobImage.FileName;
+
                 db.Entry(jobs).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
