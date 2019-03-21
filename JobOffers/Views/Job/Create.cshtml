@@ -7,9 +7,14 @@
 <h3>Create a new Job</h3>
 
 
-@using (Html.BeginForm("Create","Job",FormMethod.Post, new { enctype = "multipart/form-data"}))
+@using (Html.BeginForm("Create", "Job", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+
+    //div to show errors
+    <div class="alert alert-danger" id="error-div" style="display:none">
+        <span id="view-error"></span>
+    </div>
 
     <div class="form-horizontal">
         <hr />
@@ -33,7 +38,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.JobImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="JobImage" class="form-control"/>
+                <input type="file" name="JobImage" class="form-control" id="JobImage" />
                 @Html.ValidationMessageFor(model => model.JobImage, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -48,7 +53,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" id="save" />
             </div>
         </div>
     </div>
@@ -58,6 +63,17 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@section scripts{
+    <script>
+        $(function () {
+            $("#save").click(function () {
+
+                if ($("#JobImage").val() == "") {
+                    $("#error-div").fadeIn();
+                    $("#view-error").append("you must enter an image !");
+                    return false;
+                }
+            });
+        });
+    </script>
 }
