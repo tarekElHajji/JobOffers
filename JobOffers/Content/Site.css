@@ -14,6 +14,15 @@ body {
     position: relative;
 }
 
+.thumbnailJobs{
+    margin:5px;
+    min-height:250px;
+}
+
+.jumbotron {
+     background-image: url('../Images/jobSearch.jpg');
+     min-height:300px;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {

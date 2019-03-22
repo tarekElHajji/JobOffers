@@ -19,6 +19,6 @@ namespace JobOffers.Models
         [Display(Name ="Category Description")]
         public string CategoryDescription { get; set; }
 
-        public virtual IEnumerable<Jobs> Jobs { get; set; }
+        public virtual ICollection<Jobs> Jobs { get; set; }
     }
 }
