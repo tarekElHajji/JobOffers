@@ -88,14 +88,22 @@ namespace JobOffers.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId")] Jobs jobs, HttpPostedFileBase JobImage)
+        public ActionResult Edit([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId")] Jobs jobs, HttpPostedFileBase JImage)
         {
             if (ModelState.IsValid)
-            {
-                string path = Path.Combine(Server.MapPath("~/Uploads"), JobImage.FileName);
-                JobImage.SaveAs(path);
+            {              
+                if(JImage != null)
+                {
+                    //delete old path
+                    string oldPath = Path.Combine(Server.MapPath("~/Uploads"), jobs.JobImage);
+                    System.IO.File.Delete(oldPath);
 
-                jobs.JobImage = JobImage.FileName;
+                    string path = Path.Combine(Server.MapPath("~/Uploads"), JImage.FileName);
+                    JImage.SaveAs(path);
+
+                    jobs.JobImage = JImage.FileName;
+                }
+                
 
                 db.Entry(jobs).State = EntityState.Modified;
                 db.SaveChanges();
@@ -126,6 +134,10 @@ namespace JobOffers.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Jobs jobs = db.Jobs.Find(id);
+
+            string oldPath = Path.Combine(Server.MapPath("~/Uploads"), jobs.JobImage);
+            System.IO.File.Delete(oldPath);
+
             db.Jobs.Remove(jobs);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -38,7 +38,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.JobImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="JobImage" class="form-control" id="JobImage" />
+                <input type="file" name="JobImage" class="form-control" id="JImage" />
                 @Html.ValidationMessageFor(model => model.JobImage, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,10 +68,36 @@
         $(function () {
             $("#save").click(function () {
 
-                if ($("#JobImage").val() == "") {
+                if ($("#JImage").val() == "") {
                     $("#error-div").fadeIn();
                     $("#view-error").append("you must enter an image !");
                     return false;
+                }
+            });
+        });
+
+        $(function () {
+            $("#save").click(function () {
+                if ($("#JImage").val() != "") {
+                    var fileName = document.getElementById("JImage").value;
+
+                    //check if the image extension is valid
+                    var extensionImg = fileName.substr(fileName.lastIndexOf('.') + 1);
+                    var validExtensions = ['jpg', 'png', 'gif', 'bmp'];
+
+                    if ($.inArray(extensionImg, validExtensions) == -1) {
+                        $("#error-div").fadeIn();
+                        $("#view-error").append("select an image with a valid extension !");
+                        return false;
+                    }
+
+                    //check if the image size is valid
+                    var fileSize = document.getElementById("JImage").files[0].size / 1024 / 1024;
+                    if (fileSize > 1) {
+                        $("#error-div").fadeIn();
+                        $("#view-error").append("select an image with a max size 2 MO !");
+                        return false;
+                    }
                 }
             });
         });
