@@ -14,16 +14,6 @@ body {
     position: relative;
 }
 
-.thumbnailJobs{
-    margin:5px;
-    min-height:250px;
-}
-
-.jumbotron {
-     background-image: url('../Images/jobSearch.jpg');
-     min-height:300px;
-}
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -61,6 +51,29 @@ textarea {
         color: #D0D0D0;
         font-size: 15px;
     }
+
+.thumbnailJobs {
+    margin: 5px;
+    min-height: 250px;
+}
+
+.jumbotron {
+    background-image: url('../Images/jobSearch.jpg');
+    min-height: 300px;
+}
+
+h3 {
+    color: #3276b1;
+}
+
+.jobImage {
+    height: 70px;
+    width: 70px;
+}
+
+.table tbody > tr > td {
+    vertical-align: middle;
+}
 
 #myFooter {
     background-color: #3c3d41;
@@ -153,18 +166,6 @@ textarea {
         margin:  0;
         line-height: 25px;
     }
-
-h3 {
-    color: #3276b1;
-}
-
-.jobImage{
-    height:70px;
-    width: 70px;
-}
-.table tbody > tr > td{
-    vertical-align: middle;
-}
 
 @media (min-width: 768px) and (max-width: 992px) {
     /*.navbar-nav > li > a {
