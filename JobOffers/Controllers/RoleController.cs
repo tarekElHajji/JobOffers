@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -41,6 +42,7 @@ namespace JobOffers.Controllers
 
         // POST: Role/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(IdentityRole role)
         {
             if (ModelState.IsValid)
@@ -53,47 +55,50 @@ namespace JobOffers.Controllers
         }
 
         // GET: Role/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var role = db.Roles.Find(id);
+            if(role == null)
+            {
+                return HttpNotFound();
+            }
+            return View(role);
         }
 
         // POST: Role/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include ="Id, Name")]IdentityRole role)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(role).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(role);
         }
 
         // GET: Role/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            var role = db.Roles.Find(id);
+            if(role == null)
+            {
+                return HttpNotFound();
+            }
+            return View(role);
         }
 
         // POST: Role/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string Id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var role = db.Roles.Find(Id);
+            db.Roles.Remove(role);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
