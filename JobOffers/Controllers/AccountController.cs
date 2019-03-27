@@ -141,7 +141,7 @@ namespace identity.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.UserType = new SelectList(db.Roles.Where(r=> ! r.Name.Contains("Administrators")), "Name", "Name");
+            ViewBag.UserType = new SelectList(db.Roles.Where(r=> ! r.Name.Contains("Admin")), "Name", "Name");
             return View();
         }
 
@@ -154,7 +154,7 @@ namespace identity.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.UserType = new SelectList(db.Roles, "Name", "Name");
+                ViewBag.UserType = new SelectList(db.Roles.Where(r => !r.Name.Contains("Admin")), "Name", "Name");
 
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, UserType = model.UserType };
                 var result = await UserManager.CreateAsync(user, model.Password);
