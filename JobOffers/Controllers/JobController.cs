@@ -12,11 +12,13 @@ using System.IO;
 
 namespace JobOffers.Controllers
 {
+    [Authorize(Roles= "Admin,publishers")]
     public class JobController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Job
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var jobs = db.Jobs.Include(j => j.Categorie);
@@ -24,6 +26,7 @@ namespace JobOffers.Controllers
         }
 
         // GET: Job/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

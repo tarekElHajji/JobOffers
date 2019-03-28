@@ -11,17 +11,20 @@ using identity.Models;
 
 namespace JobOffers.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class CategoryController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categorie
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Categories.ToList());
         }
 
         // GET: Categorie/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
