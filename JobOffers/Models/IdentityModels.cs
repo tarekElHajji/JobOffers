@@ -34,5 +34,8 @@ namespace identity.Models
         public System.Data.Entity.DbSet<JobOffers.Models.Categories> Categories { get; set; }
 
         public System.Data.Entity.DbSet<JobOffers.Models.Jobs> Jobs { get; set; }
+
+        public System.Data.Entity.DbSet<JobOffers.Models.ApplyForJob> ApplyForJobs { get; set; }
+
     }
 }

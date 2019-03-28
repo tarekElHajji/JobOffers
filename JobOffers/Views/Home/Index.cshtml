@@ -20,6 +20,7 @@
                         <div class="col-md-3 thumbnail thumbnailJobs">
                             <img src="~/uploads/@subItem.JobImage" />
                             <h3>@Html.DisplayFor(modelItem => subItem.JobTitle)</h3>
+                            <h4>@Html.ActionLink("More details","Details",new { id = subItem.Id }, new { @class="btn btn-success" })</h4>
                         </div>
                     }
                 </div>

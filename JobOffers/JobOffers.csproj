@@ -209,8 +209,13 @@
     <Compile Include="Migrations\201903202137425_UpdateJobTable.Designer.cs">
       <DependentUpon>201903202137425_UpdateJobTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903281449125_addApplyForJobTable.cs" />
+    <Compile Include="Migrations\201903281449125_addApplyForJobTable.Designer.cs">
+      <DependentUpon>201903281449125_addApplyForJobTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplyForJob.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Jobs.cs" />
@@ -301,6 +306,8 @@
     <Content Include="Views\Role\Details.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Apply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -338,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903202137425_UpdateJobTable.resx">
       <DependentUpon>201903202137425_UpdateJobTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903281449125_addApplyForJobTable.resx">
+      <DependentUpon>201903281449125_addApplyForJobTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
