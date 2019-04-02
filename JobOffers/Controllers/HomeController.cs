@@ -71,6 +71,14 @@ namespace identity.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult GetJobsByUser()
+        {
+            var UserId = User.Identity.GetUserId();
+            var jobs = db.ApplyForJobs.Where(a => a.UserId == UserId).ToList();
+            return View(jobs);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
