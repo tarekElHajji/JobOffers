@@ -3,6 +3,7 @@ using JobOffers.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -78,6 +79,76 @@ namespace identity.Controllers
             var jobs = db.ApplyForJobs.Where(a => a.UserId == UserId).ToList();
             return View(jobs);
         }
+
+        [Authorize]
+        public ActionResult ApplyDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var job = db.ApplyForJobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            return View(job);
+        }
+
+        [Authorize]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var job = db.ApplyForJobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            return View(job);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ApplyForJob applyForJob)
+        {
+            if (ModelState.IsValid)
+            {
+                applyForJob.ApplyDate = DateTime.Now;
+                db.Entry(applyForJob).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("GetJobsByUser");
+            }
+            return View(applyForJob);
+        }
+
+        [Authorize]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var job = db.ApplyForJobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            return View(job);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var job = db.ApplyForJobs.Find(id);
+            db.ApplyForJobs.Remove(job);
+            db.SaveChanges();
+            return RedirectToAction("GetJobsByUser");
+        }
+
 
         public ActionResult About()
         {
