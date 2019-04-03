@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using JobOffers.Models;
 using identity.Models;
 using System.IO;
+using Microsoft.AspNet.Identity;
 
 namespace JobOffers.Controllers
 {
@@ -61,6 +62,7 @@ namespace JobOffers.Controllers
                 JobImage.SaveAs(path);
 
                 jobs.JobImage = JobImage.FileName;
+                jobs.UserId = User.Identity.GetUserId();
                 db.Jobs.Add(jobs);
                 db.SaveChanges();
                 return RedirectToAction("Index");

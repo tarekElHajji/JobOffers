@@ -1,4 +1,5 @@
-﻿using System;
+﻿using identity.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,6 +28,11 @@ namespace JobOffers.Models
         [Display(Name = "Job Category")]
         public int CategoriesId { get; set; }
 
+       [Required]
+        public string UserId { get; set; }
+
         public virtual Categories Categorie { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
     }
 }

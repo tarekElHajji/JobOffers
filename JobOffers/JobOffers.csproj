@@ -213,6 +213,10 @@
     <Compile Include="Migrations\201903281449125_addApplyForJobTable.Designer.cs">
       <DependentUpon>201903281449125_addApplyForJobTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904031513307_updateJob.cs" />
+    <Compile Include="Migrations\201904031513307_updateJob.Designer.cs">
+      <DependentUpon>201904031513307_updateJob.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplyForJob.cs" />
@@ -352,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903281449125_addApplyForJobTable.resx">
       <DependentUpon>201903281449125_addApplyForJobTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904031513307_updateJob.resx">
+      <DependentUpon>201904031513307_updateJob.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
