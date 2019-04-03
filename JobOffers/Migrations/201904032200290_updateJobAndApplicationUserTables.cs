@@ -3,13 +3,13 @@ namespace JobOffers.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class updateJob : DbMigration
+    public partial class updateJobAndApplicationUserTables : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Jobs", "UserId", c => c.String(nullable: false, maxLength: 128));
+            AddColumn("dbo.Jobs", "UserId", c => c.String(maxLength: 128));
             CreateIndex("dbo.Jobs", "UserId");
-            AddForeignKey("dbo.Jobs", "UserId", "dbo.AspNetUsers", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Jobs", "UserId", "dbo.AspNetUsers", "Id");
         }
         
         public override void Down()

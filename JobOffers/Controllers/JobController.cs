@@ -54,8 +54,8 @@ namespace JobOffers.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId")] Jobs jobs, HttpPostedFileBase JobImage)
-        {
+        public ActionResult Create(Jobs jobs, HttpPostedFileBase JobImage)
+        {           
             if (ModelState.IsValid)
             {
                 string path = Path.Combine(Server.MapPath("~/Uploads"), JobImage.FileName);

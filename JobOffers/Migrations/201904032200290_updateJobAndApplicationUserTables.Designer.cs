@@ -7,13 +7,13 @@ namespace JobOffers.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class updateJob : IMigrationMetadata
+    public sealed partial class updateJobAndApplicationUserTables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updateJob));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateJobAndApplicationUserTables));
         
         string IMigrationMetadata.Id
         {
-            get { return "201904031513307_updateJob"; }
+            get { return "201904032200290_updateJobAndApplicationUserTables"; }
         }
         
         string IMigrationMetadata.Source
