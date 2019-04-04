@@ -149,10 +149,33 @@ namespace identity.Controllers
             return RedirectToAction("GetJobsByUser");
         }
 
+        [Authorize]
+        public ActionResult GetJobsByPublisher()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var jobs = from app in db.ApplyForJobs
+                       join job in db.Jobs
+                       on app.JobsId equals job.Id
+                       where job.UserId == userId
+                       select app;
+
+            var grouped = from j in jobs
+                          group j by j.Job.JobTitle
+                          into gr
+                          select new JobsByPublisher
+                          {
+                              JobTitle = gr.Key,
+                              Requests = gr
+                          };
+
+            return View(grouped.ToList());
+        }
+
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Y0our application description page.";
 
             return View();
         }

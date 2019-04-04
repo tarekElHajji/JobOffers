@@ -1,0 +1,43 @@
+﻿@model IEnumerable<JobOffers.Models.JobsByPublisher>
+
+@{
+    ViewBag.Title = "GetJobsByPublisher";
+}
+
+<h3>Get Jobs By Publisher</h3>
+<br /><br />
+
+@foreach (var gr in Model)
+{
+    <h4>@gr.JobTitle</h4>
+    <table class="table table-bordered table-hover">
+        <tr class="success">
+            <th>
+                User Name
+            </th>
+            <th>
+                Message
+            </th>
+            <th>
+                Apply Date
+            </th>
+
+        </tr>
+
+        @foreach (var item in gr.Requests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplyDate)
+                </td>
+            </tr>
+        }
+
+    </table>
+}

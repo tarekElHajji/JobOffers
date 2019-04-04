@@ -221,6 +221,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplyForJob.cs" />
     <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\JobsByPublisher.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Jobs.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -316,6 +317,7 @@
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\ApplyDetails.cshtml" />
+    <Content Include="Views\Home\GetJobsByPublisher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
