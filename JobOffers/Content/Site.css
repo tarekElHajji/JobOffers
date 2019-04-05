@@ -52,9 +52,30 @@ textarea {
         font-size: 15px;
     }
 
+
+#search {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+    transition:width 0.4s ease-in-out;
+}
+
+.nav > li > form > button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    margin-left:0px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
 .thumbnailJobs {
     margin: 5px;
-    min-height: 250px;
+    height: 300px;
 }
 
 .jumbotron {
@@ -178,6 +199,10 @@ h3 {
 
     .navbar-nav > li > a {
         padding-right : 0px;
+    }
+
+    .thumbnailJobs {
+        height: 600px;
     }
 }
 @media (min-width: 992px) {

@@ -25,13 +25,17 @@
                         <a href="/Home/"> <i class="glyphicon glyphicon-home"></i> Home</a>
                     </li>
                     <li>
-                        <a href="/category/"> <i class="glyphicon glyphicon-briefcase"></i> Category</a>
-                    </li>
-                    <li>
                         <a href="/Home/about"> <i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
                     <li>
                         <a href="#"> <i class="glyphicon glyphicon-envelope"></i> Contact us</a>
+                    </li>
+                    <li>
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                        {
+                            <input type="search" placeholder="Search.." name="search" id="search"/>
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        }
                     </li>
                 </ul>
                 @*login partial navbar*@
@@ -78,7 +82,7 @@
                         <a href="#" class="email"><i class="fa fa-envelope"></i></a>
                     </div>
                 </div>
-            </div>           
+            </div>
         </div>
         <div class="footer-copyright">
             <p>© 2018 Copyright: Job Offers</p>

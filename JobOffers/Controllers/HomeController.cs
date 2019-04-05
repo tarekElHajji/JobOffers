@@ -172,6 +172,18 @@ namespace identity.Controllers
             return View(grouped.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            var result = db.Jobs.Where(a => a.JobTitle.Contains(search)
+            || a.JobContent.Contains(search)
+            || a.Categorie.CategoryName.Contains(search)
+            || a.Categorie.CategoryDescription.Contains(search)).ToList();
+
+            ViewBag.search = search;
+            return View(result);
+        }
+
 
         public ActionResult About()
         {
