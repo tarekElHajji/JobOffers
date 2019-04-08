@@ -73,6 +73,11 @@ textarea {
     cursor: pointer;
 }
 
+.UserMenu{
+    min-width:300px;
+    padding:5px;
+}
+
 .thumbnailJobs {
     margin: 5px;
     height: 300px;

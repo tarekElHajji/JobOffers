@@ -1,27 +1,81 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using identity.Models;
+@using Microsoft.AspNet.Identity;
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-log-out"></i> Log off</a></li>
-    </ul>
+        var db = new ApplicationDbContext();
+        var userId = User.Identity.GetUserId();
+        var currentUser = db.Users.Where(a => a.Id == userId).SingleOrDefault();
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-user">  </span>
+                    <strong>Hello @currentUser.UserName</strong>
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu UserMenu">
+                    <li>
+                        <div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p class="text-center" id="UserMenuImage">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p class="text-left">
+                                        <strong>
+                                            @currentUser.UserName
+                                        </strong>
+                                    </p>
+                                    @if (currentUser.UserType == "publishers")
+                                    {
+                                        <a href="#" class="btn btn-success btn-block">Jobs that you published</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="btn btn-success btn-block">Jobs you applied for it</a>
+                                    }
+                                    <a href="#" class="btn btn-primary btn-block">Configure compte</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-danger btn-block"><i class="glyphicon glyphicon-log-out"></i> Log off</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        @*<ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-log-out"></i> Log off</a></li>
+        </ul>*@
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>
-            <a href="/Account/Register" id = "registerLink"> <i class="glyphicon glyphicon-user"></i> Register</a>
+            <a href="/Account/Register" id="registerLink"> <i class="glyphicon glyphicon-user"></i> Register</a>
             @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
         </li>
         <li>
-            <a href="/Account/Login" id = "loginLink"> <i class="glyphicon glyphicon-lock"></i> Log in</a>
+            <a href="/Account/Login" id="loginLink"> <i class="glyphicon glyphicon-lock"></i> Log in</a>
             @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })*@
         </li>
     </ul>
