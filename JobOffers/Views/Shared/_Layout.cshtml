@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using identity.Models;
+@using Microsoft.AspNet.Identity;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,6 +10,12 @@
     @Styles.Render("~/Content/fontAwesome")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+@{
+
+    var db = new ApplicationDbContext();
+    var userId = User.Identity.GetUserId();
+    var currentUser = db.Users.Where(a => a.Id == userId).SingleOrDefault();
+}
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -24,6 +32,28 @@
                     <li>
                         <a href="/Home/"> <i class="glyphicon glyphicon-home"></i> Home</a>
                     </li>
+
+                    <li class="dropdown">
+                        <a class=" dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Jobs
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="~/Job/JobsByCategory?category=public sector" title="Lien 1">Public Jobs</a></li>
+                            <li><a href="~/Job/JobsByCategory?category=private sector" title="Lien 2">Private Jobs</a></li>
+                            <li><a href="~/Job/JobsByCategory?category=abroad jobs" title="Lien 3">Abroad Jobs</a></li>
+                        </ul>
+                    </li>
+
+                    @if (currentUser != null)
+                    {
+                        if (currentUser.UserType == "publishers" || currentUser.UserType == "admin")
+                        {
+                            <li>
+                                <a href="/Job/Create"> <i class="glyphicon glyphicon-plus-sign"></i> Publish new Job</a>
+                            </li>
+                        }
+                    }
                     <li>
                         <a href="/Home/about"> <i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
@@ -33,7 +63,7 @@
                     <li>
                         @using (Html.BeginForm("Search", "Home", FormMethod.Post))
                         {
-                            <input type="search" placeholder="Search.." name="search" id="search"/>
+                            <input type="search" placeholder="Search.." name="search" id="search" />
                             <button type="submit"><i class="fa fa-search"></i></button>
                         }
                     </li>

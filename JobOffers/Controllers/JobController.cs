@@ -19,13 +19,21 @@ namespace JobOffers.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Job
-        [AllowAnonymous]
         public ActionResult Index()
         {
-            var jobs = db.Jobs.Include(j => j.Categorie);
+            var UserId = User.Identity.GetUserId();
+            var jobs = db.Jobs.Where(j => j.UserId == UserId).Include(j => j.Categorie);
             return View(jobs.ToList());
         }
 
+        [AllowAnonymous]
+        public ActionResult JobsByCategory(string category)
+        {
+            ViewBag.CategoryName = "Public Sector"; 
+            var jobs = db.Jobs.Where(j => j.Categorie.CategoryName == category).Include(j => j.Categorie);
+            return View("JobsByCategory", jobs.ToList());
+        }
+        
         // GET: Job/Details/5
         [AllowAnonymous]
         public ActionResult Details(int? id)
@@ -93,7 +101,7 @@ namespace JobOffers.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId")] Jobs jobs, HttpPostedFileBase JImage)
+        public ActionResult Edit([Bind(Include = "Id,JobTitle,JobContent,JobImage,CategoriesId, UserId")] Jobs jobs, HttpPostedFileBase JImage)
         {
             if (ModelState.IsValid)
             {              

@@ -32,13 +32,15 @@
                                             @currentUser.UserName
                                         </strong>
                                     </p>
-                                    @if (currentUser.UserType == "publishers")
+                                    @if (currentUser.UserType == "publishers" || currentUser.UserType =="admin")
                                     {
-                                        <a href="#" class="btn btn-success btn-block">Jobs that you published</a>
+                                        <a href="~/Job/index" class="btn btn-success btn-block">Jobs that you published</a>
+                                        <a href="~/Home/GetJobsByPublisher" class="btn btn-success btn-block">Candidate list</a>
+
                                     }
                                     else
                                     {
-                                        <a href="#" class="btn btn-success btn-block">Jobs you applied for it</a>
+                                        <a href="~/home/GetJobsByUser" class="btn btn-success btn-block">Jobs you applied for it</a>
                                     }
                                     <a href="#" class="btn btn-primary btn-block">Configure compte</a>
                                 </div>
@@ -58,13 +60,7 @@
                 </ul>
             </li>
         </ul>
-
-        @*<ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-log-out"></i> Log off</a></li>
-        </ul>*@
+        
     }
 }
 else

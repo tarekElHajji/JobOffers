@@ -1,0 +1,26 @@
+﻿@model IEnumerable<JobOffers.Models.Jobs>
+
+@{
+    ViewBag.Title = "JobsByCategory";
+}
+
+<h3>Jobs By Category</h3>
+
+<div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">@ViewBag.CategoryName</div>
+            <div class="panel-body">
+                <div class="row">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-3 thumbnail thumbnailJobs">
+                            <img src="~/uploads/@item.JobImage" />
+                            <h3>@Html.DisplayFor(modelItem => item.JobTitle)</h3>
+                            <h4>@Html.ActionLink("More details", "Details", new { id = item.Id }, new { @class = "btn btn-success" })</h4>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+</div>
