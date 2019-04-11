@@ -52,14 +52,24 @@
                             <li>
                                 <a href="/Job/Create"> <i class="glyphicon glyphicon-plus-sign"></i> Publish new Job</a>
                             </li>
+
+                            if (currentUser.UserType == "admin")
+                            {
+                                <li>
+                                    <a href="/Category"> <i class="glyphicon glyphicon-wrench"></i> Caterories</a>
+                                </li>
+                            }
                         }
                     }
-                    <li>
-                        <a href="/Home/about"> <i class="glyphicon glyphicon-info-sign"></i> About</a>
-                    </li>
-                    <li>
-                        <a href="#"> <i class="glyphicon glyphicon-envelope"></i> Contact us</a>
-                    </li>
+                    @if (currentUser == null || currentUser.UserType != "admin")
+                    {
+                        <li>
+                            <a href="/Home/about"> <i class="glyphicon glyphicon-info-sign"></i> About</a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="glyphicon glyphicon-envelope"></i> Contact us</a>
+                        </li>
+                    }
                     <li>
                         @using (Html.BeginForm("Search", "Home", FormMethod.Post))
                         {
@@ -98,9 +108,9 @@
                         Other links
                     </h3>
                     <ul>
-                        <li><a href="">Private Sector Employment</a></li>
-                        <li><a href="">Public Sector Employment</a></li>
-                        <li><a href="">Abroad Jobs</a></li>
+                        <li><a href="~/Job/JobsByCategory?category=private sector">Private Sector Employment</a></li>
+                        <li><a href="~/Job/JobsByCategory?category=public sector">Public Sector Employment</a></li>
+                        <li><a href="~/Job/JobsByCategory?category=abroad jobs">Abroad Jobs</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4">

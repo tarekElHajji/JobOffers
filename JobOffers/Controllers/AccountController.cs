@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using identity.Models;
+using System.Data.Entity;
 
 namespace identity.Controllers
 {
@@ -24,7 +25,7 @@ namespace identity.Controllers
             db = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -36,9 +37,9 @@ namespace identity.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -122,7 +123,7 @@ namespace identity.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -141,7 +142,7 @@ namespace identity.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.UserType = new SelectList(db.Roles.Where(r=> ! r.Name.Contains("Admin")), "Name", "Name");
+            ViewBag.UserType = new SelectList(db.Roles.Where(r => !r.Name.Contains("Admin")), "Name", "Name");
             return View();
         }
 
@@ -160,7 +161,7 @@ namespace identity.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -175,6 +176,51 @@ namespace identity.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+
+        public ActionResult EditAccount()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Where(u => u.Id == userId).SingleOrDefault();
+
+            EditAccountViewModel editAccount = new EditAccountViewModel();
+            editAccount.UserName = user.UserName;
+            editAccount.Email = user.Email;
+
+            return View(editAccount);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAccount(EditAccountViewModel editAccount)
+        {
+            if (ModelState.IsValid)
+            {
+                var UserId = User.Identity.GetUserId();
+                var currentUser = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+                if (!UserManager.CheckPassword(currentUser, editAccount.CurrentPassword))
+                {
+                    ViewBag.Message = "incorrect password";
+                }
+                else
+                {
+                    if (editAccount.NewPassword != null)
+                    {
+                        var newPasswordHash = UserManager.PasswordHasher.HashPassword(editAccount.NewPassword);
+                        currentUser.PasswordHash = newPasswordHash;
+
+                    }
+                    currentUser.UserName = editAccount.UserName;
+                    currentUser.Email = editAccount.Email;
+
+                    db.Entry(currentUser).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("index", "Home");
+                }
+
+            }
+            return View(editAccount);
         }
 
         //

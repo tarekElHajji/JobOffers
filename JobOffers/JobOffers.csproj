@@ -320,6 +320,7 @@
     <Content Include="Views\Home\GetJobsByPublisher.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Job\JobsByCategory.cshtml" />
+    <Content Include="Views\Account\EditAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

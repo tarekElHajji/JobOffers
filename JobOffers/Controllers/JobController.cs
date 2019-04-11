@@ -29,7 +29,7 @@ namespace JobOffers.Controllers
         [AllowAnonymous]
         public ActionResult JobsByCategory(string category)
         {
-            ViewBag.CategoryName = "Public Sector"; 
+            ViewBag.CategoryName = category; 
             var jobs = db.Jobs.Where(j => j.Categorie.CategoryName == category).Include(j => j.Categorie);
             return View("JobsByCategory", jobs.ToList());
         }
