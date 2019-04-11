@@ -30,7 +30,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.JobContent)
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.JobContent).ToString()));
         </dd>
 
         <dt>
@@ -38,9 +38,9 @@
         </dt>
 
         <dd>
-            <img src="~/Uploads/@Html.DisplayFor(model => model.JobImage)" 
-                 alt="@Html.DisplayFor(model => model.JobImage)" 
-                 class="thumbnail" 
+            <img src="~/Uploads/@Html.DisplayFor(model => model.JobImage)"
+                 alt="@Html.DisplayFor(model => model.JobImage)"
+                 class="thumbnail"
                  style="height:150px; width:150px;">
         </dd>
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace JobOffers.Models
 {
@@ -17,6 +18,7 @@ namespace JobOffers.Models
         public string JobTitle { get; set; }
 
         [Required]
+        [AllowHtml]
         [Display(Name ="Job Content")]
         public string JobContent { get; set; }
 
