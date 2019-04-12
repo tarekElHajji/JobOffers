@@ -212,6 +212,14 @@ h3 {
 }
 @media (min-width: 992px) {
     .form-horizontal .control-label {
-         text-align: left; 
+        text-align: left;
+    }
+
+    .col-md-3 {
+        width: 23%;
+    }
+
+    .col-md-3 >img{
+        height:180px;
     }
 }
