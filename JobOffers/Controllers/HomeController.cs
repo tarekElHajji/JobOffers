@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -192,11 +193,33 @@ namespace identity.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(ContactModel contact)
+        {
+            var mail = new MailMessage();
+
+            mail.From = new MailAddress(contact.Email);
+            mail.To.Add(new MailAddress("tarek.hajji.93@gmail.com"));
+            mail.Subject = contact.Subject;
+            mail.Body = contact.Message;
+
+            var loginInfo = new NetworkCredential("tarek.hajji.93@gmail.com", "xxxxxx");
+
+            var smtpclient = new SmtpClient("smtp.gmail.com", 587)
+            {
+                EnableSsl = true,
+                Credentials = loginInfo
+            };
+            smtpclient.Send(mail);
+
+            return RedirectToAction("index");
         }
     }
 }
